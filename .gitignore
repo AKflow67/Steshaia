@@ -1,0 +1,12 @@
+# Fichier vidéo source brut Instagram (ne pas committer)
+AQPftjTtJ2-*.mp4
+
+# Logos PNG d'origine remplacés par les WebP (les masters sont dans assets-sites/steshaia/)
+imageslogo.png
+imageslogo-complet.png
+
+# Sous-dossier git imbriqué parasite (reste d'un essai GitHub Desktop) - ne pas committer
+Steshaia/
+
+.DS_Store
+Thumbs.db

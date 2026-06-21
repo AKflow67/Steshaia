@@ -1,0 +1,104 @@
+/* =====================================================================
+   THÈME ECWID — STESHAÏA Bijoux
+   ---------------------------------------------------------------------
+   Objectif : habiller la boutique Ecwid aux couleurs du site
+   (crème, dégradé orange -> fuchsia, or champagne, polices Marcellus + Jost)
+   pour qu'elle s'intègre proprement et ne ressemble PAS au Ecwid "carré"
+   par défaut.
+
+   OÙ LE COLLER :
+   Admin Ecwid -> Design -> (bas de page) onglet/zone "CSS"
+   (thème CSS du storefront). Coller tout ce fichier, enregistrer.
+
+   À FAIRE AUSSI, côté réglages natifs (Admin -> Design, sans code) :
+   - Colonnes de produits : 3 (desktop)
+   - Taille des cartes : moyenne
+   - Afficher le prix, masquer le SKU
+   - Activer la recherche + la navigation par catégories
+
+   NB IMPORTANT : Ecwid fait évoluer ses noms de classes selon les versions
+   du storefront. Les sélecteurs ci-dessous couvrent les cas courants ;
+   on les ajustera en 5 min sur la VRAIE boutique une fois le Store ID en
+   place (Admin -> Design -> "Trouver les sélecteurs CSS", ou clic droit
+   -> Inspecter). Rien d'irréversible ici.
+   ===================================================================== */
+
+/* Polices du site */
+@import url('https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500;600&display=swap');
+
+/* ---- Base ---- */
+.ec-store,
+.ecwid-productBrowser,
+.ec-store__content-wrapper {
+  font-family: 'Jost', system-ui, -apple-system, sans-serif !important;
+  color: #2C141B;
+}
+
+/* Titres (catégories, fiches produit) en serif */
+.ec-store h1,
+.ec-store h2,
+.grid-product__title,
+.details-product-title__inner {
+  font-family: 'Marcellus', Georgia, serif !important;
+  letter-spacing: .01em;
+}
+
+/* ---- Cartes produit : arrondies, fond blanc, ombre douce ---- */
+.grid-product__wrap-inner,
+.grid-product__center {
+  background: #fff;
+  border: 1px solid rgba(201, 162, 75, .30);
+  border-radius: 18px;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.grid-product:hover .grid-product__wrap-inner {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 46px rgba(244, 80, 120, .16);
+}
+.grid-product__image,
+.grid-product__picture {
+  border-radius: 14px;
+}
+
+/* ---- Prix en or champagne ---- */
+.grid-product__price-value,
+.details-product-price__value,
+.ec-price-item {
+  color: #A67C2E !important;
+  font-family: 'Marcellus', serif !important;
+}
+
+/* ---- Boutons (Acheter / Ajouter au panier) : dégradé arrondi ---- */
+.ec-store .form-control--button .form-control__button,
+.ec-store button.form-control__button,
+.ec-cart__button .form-control__button,
+.details-product-purchase__add-to-bag .form-control__button {
+  background: linear-gradient(135deg, #FF9A3D 0%, #FF5A4D 45%, #F5167E 100%) !important;
+  border: none !important;
+  border-radius: 50px !important;
+  color: #fff !important;
+  letter-spacing: .04em;
+  box-shadow: 0 6px 18px rgba(245, 22, 126, .28);
+}
+.ec-store .form-control__button:hover {
+  filter: brightness(1.04);
+}
+
+/* ---- Barre de recherche + catégories arrondies ---- */
+.ec-store__search input,
+.form-control--search .form-control__text {
+  border-radius: 50px !important;
+  border: 1px solid rgba(201, 162, 75, .30) !important;
+}
+
+/* ---- Liens / accents ---- */
+.ec-store a,
+.ec-link {
+  color: #ED1E79;
+}
+
+/* ---- Fond général de la boutique : crème (optionnel) ---- */
+.ec-store {
+  background: transparent;
+}

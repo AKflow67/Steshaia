@@ -92,7 +92,9 @@
     /* ====== HERO ====== */
     .hero{min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:96px 1.6rem 4rem}
     @keyframes heroGrad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    .hero-bg{position:absolute;inset:-50% 0;z-index:0;background:url('hero-bg.webp') center 45%/cover no-repeat;will-change:transform}
+    .hero-bg{position:absolute;inset:-24% 0;z-index:0;overflow:hidden;will-change:transform}
+    .hero-bg-img{position:absolute;inset:0;background:url('hero-bg.webp') center 45%/cover no-repeat;animation:kenburns 24s ease-in-out infinite alternate;will-change:transform}
+    @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.1)}}
     .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(44,20,27,.45),rgba(44,20,27,.18) 38%,rgba(120,20,40,.5))}
     .hero-frame{position:relative;width:min(100%,330px);aspect-ratio:9/16;max-height:78vh;margin:0 auto;border-radius:26px;overflow:hidden;box-shadow:0 30px 70px rgba(120,20,40,.28);border:6px solid #fff}
     .hero-frame video{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.06) contrast(1.02)}
@@ -282,7 +284,7 @@
 
 <!-- ====== HERO ====== -->
 <header class="hero">
-  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-bg" id="heroBg"><div class="hero-bg-img"></div></div>
   <div class="hero-overlay"></div>
   <div class="hero-inner">
     <img class="hero-medallion" src="imageslogo-complet.webp" alt="Logo STESHAÏA Bijoux">
@@ -647,12 +649,18 @@
     nav.classList.toggle('scrolled', window.scrollY > 50);
   }, {passive:true});
 
-  // Parallaxe hero (fond plage)
+  // Parallaxe hero (fond plage) - lissée via requestAnimationFrame
   var heroBg = document.getElementById('heroBg');
-  window.addEventListener('scroll', function(){
-    if(heroBg && window.scrollY < window.innerHeight){
-      heroBg.style.transform = 'translateY(' + (window.scrollY * 0.45) + 'px)';
+  var heroTicking = false;
+  function updateHeroParallax(){
+    if(heroBg){
+      var y = window.scrollY;
+      if(y < window.innerHeight){ heroBg.style.transform = 'translate3d(0,' + (y * 0.22) + 'px,0)'; }
     }
+    heroTicking = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!heroTicking){ requestAnimationFrame(updateHeroParallax); heroTicking = true; }
   }, {passive:true});
 
   // Menu mobile
